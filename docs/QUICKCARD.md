@@ -2,6 +2,14 @@
 
 **묻기 → 정하기 → 준비 → 한 번 실행 → 검사 → 사용자 확인 → 전달.**
 
+## 시작 0~5분 — 이 순서로
+
+1. 과제 폴더에서 Git 루트 확인. 없으면 `git init` 후 원본 그대로 `init: 과제 원본` commit.
+2. `python <도구 저장소>/install.py --target <과제 폴더>` → `python fde/kit/init_work.py`.
+3. **과제 폴더에서** Codex를 연다. 상위 폴더에서 열면 AGENTS.md가 로드되지 않는다.
+4. "지금 적용 중인 AGENTS.md 규칙 3개만 말해 줘"로 로드를 확인한다. 못 말하면 다시 연다.
+5. state.md에 작업 폴더·Git 루트·AGENTS 로드 확인을 적는다.
+
 | STATE | 남길 최소 근거 | 선택 지시 |
 |---|---|---|
 | DISCOVERY | 제약·공개 입력·질문/답 원문·Unknown | STAGE_PROMPTS의 DIS |

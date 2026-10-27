@@ -1,4 +1,5 @@
 STATE: DISCOVERY
+작업 폴더·Git 루트·AGENTS 로드 확인:
 출구조건:
 champion 점수:
 막힌 것:

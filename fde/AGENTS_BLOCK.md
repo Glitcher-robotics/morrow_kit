@@ -1,4 +1,8 @@
 # 로컬 데이터 작업 규칙
+- 첫 응답에서 현재 작업 폴더·Git 루트를 확인한다. 과제 폴더가 아니거나 Git 루트가 없으면 멈추고 알린다.
+- 담당자 답을 받으면 같은 응답 안에서 interview Q-ID에 원문을, decisions.md에 D-ID(결정·영향 REQ·설정 키)를 추가한다. 기록 전에는 그 정책을 구현하지 않는다.
+- 담당자 질문 초안을 만들기 전에 decisions.md를 확인한다. 이미 있는 결정은 다시 묻지 않고 D-ID를 인용한다.
+- Computer Use·브라우저 자동화·화면 캡처를 쓰지 않는다. 화면 확인은 HTTP 응답과 테스트로만 한다.
 - 프로젝트 README의 지정 구조·실행·데이터 사용·전달 정책이 우선한다. 기존 src와 사용자 변경을 보존한다.
 - 시작/재개는 README와 fde/work의 problem/requirements/state/handoff부터 읽는다. 없으면 필요한 템플릿만 만든다.
 - 필요할 때 fde/docs/METHOD.md와 STAGE_PROMPTS.md의 현재 STATE만 읽는다. 전부 순차 실행하거나 서류 자체를 목표로 삼지 않는다.
