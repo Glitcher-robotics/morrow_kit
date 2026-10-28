@@ -5,6 +5,7 @@
 | 처음 사용·읽는 순서 | [README.md](README.md) |
 | 전체 순서·짧은 체크 | [docs/QUICKCARD.md](docs/QUICKCARD.md) |
 | 매 프롬프트·체크포인트 기술/의도/인지 점검 | [docs/SELFCHECK.md](docs/SELFCHECK.md) |
+| Git 루트 확인·첫 commit·REQ commit·되돌리기 | [docs/GIT.md](docs/GIT.md) |
 | 데이터 처리 설계 | [docs/METHOD.md](docs/METHOD.md), [skeleton](fde/templates/skeleton.md) |
 | 현재 상태의 지시·산출물 | [docs/STAGE_PROMPTS.md](docs/STAGE_PROMPTS.md)에서 해당 STATE만 |
 | 설치·검사·정상본·ZIP | [docs/RUNBOOK.md](docs/RUNBOOK.md) |
