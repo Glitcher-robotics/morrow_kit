@@ -18,5 +18,6 @@
 | 필터·정렬·명시적 집계 | [aggregate.py](fde/reusable/aggregate.py) |
 | JSON/CSV 저장 | [export.py](fde/reusable/export.py) |
 | 로컬 업로드·표·상세 부품 | [webui.py](fde/reusable/webui.py) |
+| 화면에서 기준 시각·임계값 조절 → 즉시 재계산 | [examples/live_params](fde/examples/live_params/README.md) |
 
 AI에게: “프로젝트 README와 이 INDEX를 보고 현재 REQ에 필요한 파일 하나를 골라. 실제 업무 정책과 예시를 구분하고 지정 구조를 유지해.”

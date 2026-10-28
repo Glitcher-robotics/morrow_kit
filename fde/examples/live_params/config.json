@@ -1,0 +1,7 @@
+{
+  "base_time": "2026-01-03T06:00",
+  "window_hours": 24,
+  "trend_points": 6,
+  "lsl": 95.0,
+  "usl": 105.0
+}
