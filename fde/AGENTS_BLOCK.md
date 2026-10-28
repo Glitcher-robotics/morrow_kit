@@ -3,6 +3,10 @@
 - 담당자 답을 받으면 같은 응답 안에서 interview Q-ID에 원문을, decisions.md에 D-ID(결정·영향 REQ·설정 키)를 추가한다. 기록 전에는 그 정책을 구현하지 않는다.
 - 담당자 질문 초안을 만들기 전에 decisions.md를 확인한다. 이미 있는 결정은 다시 묻지 않고 D-ID를 인용한다.
 - Computer Use·브라우저 자동화·화면 캡처를 쓰지 않는다. 화면 확인은 HTTP 응답과 테스트로만 한다.
+- 과정 기록(problem·interview·decisions·requirements·skeleton·state·handoff)은 fde/work에만 둔다. docs/ 등에 같은 종류의 기록을 따로 만들지 않고, 과제가 지정한 제출 문서는 fde/work를 근거로 쓴다.
+- D-ID는 `D1, D2…` 형식으로 쓴다. 정책이 걸린 구현 요청에 D-ID가 없으면 적용할 D를 먼저 확인하고, 해당 D가 없으면 구현하지 말고 질문 후보로 돌린다.
+- REQ 검사가 통과하면 같은 응답에서 `git add <파일>`과 `REQ-xxx: METHOD ④ 요약 (Dn)` commit 명령을 제안하고 state의 마지막 commit을 갱신한다. Git 신원·전역 설정은 바꾸지 않는다.
+- 체크포인트(45·80·115·140·155·170분)마다 `python fde/kit/status.py --intent` 결과와 fde/docs/SELFCHECK.md의 해당 체크리스트로 빈칸을 보고한다.
 - 프로젝트 README의 지정 구조·실행·데이터 사용·전달 정책이 우선한다. 기존 src와 사용자 변경을 보존한다.
 - 시작/재개는 README와 fde/work의 problem/requirements/state/handoff부터 읽는다. 없으면 필요한 템플릿만 만든다.
 - 필요할 때 fde/docs/METHOD.md와 STAGE_PROMPTS.md의 현재 STATE만 읽는다. 전부 순차 실행하거나 서류 자체를 목표로 삼지 않는다.

@@ -51,6 +51,7 @@ interview의 질문/답, problem의 문제/범위, requirements의 합격 기준
 python fde/kit/evaluate.py
 python fde/kit/promote.py --report latest
 python fde/kit/status.py
+python fde/kit/status.py --intent   # Q→D→REQ→commit 기록 빈칸
 ```
 
 evaluate는 REQ별 명령·출력·exit code·timeout·소요 시간·work/프로젝트 파일 해시를 fde/artifacts에 기록한다. 기본 timeout은 명령당 60초이며 `--timeout 120`으로 조정할 수 있다.

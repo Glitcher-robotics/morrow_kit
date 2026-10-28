@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -184,6 +185,41 @@ class UtilityTests(Sandbox):
         self.assertIn('새 기능 금지', ' '.join(result['warnings']))
         self.assertIn('구조 변경 금지', ' '.join(result['warnings']))
         self.assertEqual(result['stage'], 'DISCOVERY')
+
+    def test_intent_reports_gaps_on_empty_templates(self):
+        init_work.initialize(self.root)
+        result = status.intent(self.root)
+        self.assertEqual(result['decisions'], 0)
+        self.assertEqual(result['problem_filled'], 0)
+        self.assertFalse(any(result['gates'].values()))
+        self.assertIn('decisions에 값이 있는 D 없음', result['gaps'])
+
+    def test_intent_counts_linked_records(self):
+        if shutil.which('git') is None:
+            self.skipTest('git not installed')
+        init_work.initialize(self.root)
+        work = self.root / 'fde/work'
+        (work / 'problem.md').write_text('\n'.join(f'{x}: 값' for x in status.PROBLEM_LABELS), encoding='utf-8')
+        (work / 'decisions.md').write_text(
+            '| D-ID | 상태 | 결정 | 근거 | REQ | 위치 |\n|---|---|---|---|---|---|\n'
+            '| D1 | 확인 | 6회 연속 → 주의 | Q-001 | REQ-001 | config.trend |\n'
+            '| D2 | 대체됨→D3 | 전 필드 동일 | Q-002 | REQ-002 | |\n'
+            '| D3 | 확인 | 같은 meas_id | Q-003 | REQ-002 | dedupe |\n| D4 | | | | | |\n', encoding='utf-8')
+        (work / 'requirements.md').write_text('| REQ-001 | 추세 (D1) | P0 |\n| REQ-002 | 중복 | P0 |\n', encoding='utf-8')
+        (work / 'state.md').write_text('STATE: VERIFY\n마지막 commit: REQ-001\nGATE1 합의: 10:20 승인\nGATE2 E2E v0:\n',
+                                       encoding='utf-8')
+        git = ['git', '-C', str(self.root), '-c', 'user.name=t', '-c', 'user.email=t@example.invalid']
+        subprocess.run(git[:3] + ['init', '-q'], check=True)
+        for message in ['init: 과제 원본', 'REQ-001: METHOD ④ 추세 (D1)']:
+            subprocess.run(git + ['commit', '-q', '--allow-empty', '-m', message], check=True)
+        result = status.intent(self.root)
+        self.assertEqual(result['git'], {'commits': 2, 'req_commits': 1, 'first': 'init: 과제 원본'})
+        self.assertEqual(result['problem_filled'], 7)
+        self.assertEqual(result['decisions'], 3)
+        self.assertEqual(result['decision_status'], {'확인': 2, '대체됨': 1})
+        self.assertEqual((result['requirements'], result['requirements_citing_d']), (2, 1))
+        self.assertEqual(result['gates'], {'GATE1': True, 'GATE2': False, 'GATE3': False, 'GATE4': False})
+        self.assertIn('D 근거 없는 REQ 1개', result['gaps'])
 
     def test_example_session_warning_boundaries(self):
         for minute, token in [(80, '구조 변경 금지'), (140, '새 기능 금지'), (170, '저장·제출 확인만'), (180, '180분 작업 시간 초과')]:

@@ -10,6 +10,8 @@
 4. "지금 적용 중인 AGENTS.md 규칙 3개만 말해 줘"로 로드를 확인한다. 못 말하면 다시 연다.
 5. state.md에 작업 폴더·Git 루트·AGENTS 로드 확인을 적는다.
 
+매 프롬프트 전 30초·체크포인트마다 2분은 [SELFCHECK](SELFCHECK.md)로 기술·의도·인지 빈칸을 확인한다.
+
 | STATE | 남길 최소 근거 | 선택 지시 |
 |---|---|---|
 | DISCOVERY | 제약·공개 입력·질문/답 원문·Unknown | STAGE_PROMPTS의 DIS |
@@ -37,6 +39,7 @@ python fde/kit/evaluate.py
 python fde/kit/promote.py --report latest
 python fde/kit/bundle.py
 python fde/kit/status.py
+python fde/kit/status.py --intent   # Q→D→REQ→commit 기록 빈칸
 ```
 
 빈 checks는 거절된다. 지정 src/가 있는 앱에는 자체 검사·전달 구조를 유지한다. work 밖 파일은 ZIP에 자동 포함되지 않는다.

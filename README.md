@@ -50,6 +50,7 @@ python fde/kit/evaluate.py
 python fde/kit/promote.py --report latest
 python fde/kit/bundle.py
 python fde/kit/status.py
+python fde/kit/status.py --intent   # Q→D→REQ→commit 기록 빈칸
 ```
 
 `champion`은 검사한 정상 후보의 별도 보관본입니다. bundle은 그 후보를 ZIP으로 묶습니다. **work 밖의 src·데이터·부품은 자동 포함되지 않습니다.** 기존 앱을 그대로 쓰는 프로젝트는 자체 검사·전달 구조를 따르세요.

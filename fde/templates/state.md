@@ -2,6 +2,8 @@ STATE: DISCOVERY
 작업 폴더·Git 루트·AGENTS 로드 확인:
 출구조건:
 champion 점수:
+마지막 commit:
+마지막 SELFCHECK (시각·빈칸):
 막힌 것:
 다음 행동:
 GATE1 합의:
