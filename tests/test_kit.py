@@ -66,6 +66,31 @@ class InstallTests(Sandbox):
         self.assertEqual(text.count('.codex/'), 1)
         self.assertEqual(module.ensure_gitignore(self.root), [])
 
+    def test_start_commits_original_then_kit_without_home_secrets(self):
+        if not shutil.which('git'):
+            self.skipTest('git not installed')
+        shutil.rmtree(self.root / 'fde')
+        (self.root / '.codex').mkdir()
+        (self.root / '.codex/auth.json').write_text('{"token": "x"}', encoding='utf-8')
+        (self.root / '.bashrc').write_text('alias x=y\n', encoding='utf-8')
+        result = installer().start(self.root)
+        self.assertEqual(len(result['log']), 2)
+        self.assertIn('init: 과제 원본', result['log'][1])
+        tracked = subprocess.run(['git', 'ls-files'], cwd=self.root, capture_output=True, text=True).stdout
+        self.assertIn('README.md', tracked)
+        self.assertIn('fde/work/decisions.md', tracked)
+        self.assertNotIn('.codex', tracked)
+        self.assertNotIn('.bashrc', tracked)
+
+    def test_start_stops_on_unknown_hidden_file_before_commit(self):
+        if not shutil.which('git'):
+            self.skipTest('git not installed')
+        (self.root / '.secret_token').write_text('x', encoding='utf-8')
+        with self.assertRaises(ValueError):
+            installer().start(self.root)
+        head = subprocess.run(['git', 'rev-parse', '--verify', '-q', 'HEAD'], cwd=self.root, capture_output=True)
+        self.assertNotEqual(head.returncode, 0)
+
 
     def test_refresh_agents_preserves_user_text_and_backs_up_old_block(self):
         old = b'prefix\r\n<!-- FDE:BEGIN -->\nold rules\n<!-- FDE:END -->\r\nsuffix\n'

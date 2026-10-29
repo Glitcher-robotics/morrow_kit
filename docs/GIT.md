@@ -17,6 +17,8 @@ git rev-parse --show-toplevel
 ## 2. 원본 그대로 첫 commit
 키트 설치·코드 수정 **전에** 한다. 그래야 이후 diff가 내가 바꾼 것만 보여 준다.
 
+**빠른 길:** `python3 /tmp/morrow_kit/install.py --target . --start` 한 줄이 아래 2·3번(.gitignore, init commit, 키트 설치 commit)을 모두 한다. 아래는 단계별로 할 때.
+
 **과제 폴더가 홈(~)이면 먼저 .gitignore.** `ls -a`에 `.bashrc`·`.config`·`.codex`가 보이면 `git add -A`가 셸 설정과 Codex 로그인 정보까지 담는다.
 ```sh
 python3 /tmp/morrow_kit/install.py --target . --gitignore-only   # 기존 줄은 두고 빠진 줄만 추가
