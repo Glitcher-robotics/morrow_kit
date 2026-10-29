@@ -56,6 +56,16 @@ class InstallTests(Sandbox):
         self.assertTrue(agents.startswith('existing\n'))
         self.assertTrue((self.root / 'fde/docs/QUICKCARD.md').is_file())
 
+    def test_gitignore_appends_home_secrets_once_and_keeps_user_lines(self):
+        (self.root / '.gitignore').write_text('out/', encoding='utf-8')
+        module = installer()
+        self.assertIn('.codex/', module.ensure_gitignore(self.root))
+        installer().install(self.root)
+        text = (self.root / '.gitignore').read_text(encoding='utf-8')
+        self.assertTrue(text.startswith('out/\n'))
+        self.assertEqual(text.count('.codex/'), 1)
+        self.assertEqual(module.ensure_gitignore(self.root), [])
+
 
     def test_refresh_agents_preserves_user_text_and_backs_up_old_block(self):
         old = b'prefix\r\n<!-- FDE:BEGIN -->\nold rules\n<!-- FDE:END -->\r\nsuffix\n'

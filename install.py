@@ -6,6 +6,26 @@ import sys
 
 SOURCE = Path(__file__).resolve().parent
 BEGIN, END = b'<!-- FDE:BEGIN -->', b'<!-- FDE:END -->'
+# 과제 폴더가 홈(~)일 때 git add -A가 셸 설정·Codex 로그인 정보까지 담지 않게 막는다.
+IGNORE = ['.codex/', '.config/', '.cache/', '.npm/', '.local/', '.ssh/', '.gnupg/', '.vscode-server/',
+          '.bash_history', '.bash_logout', '.bashrc', '.profile', '.sudo_as_admin_successful',
+          '.python_history', '.lesshst', '.viminfo', '.wget-hsts', '.git-credentials', '.netrc',
+          '.env', 'node_modules/', '__pycache__/', '*.pyc']
+
+
+def ensure_gitignore(target):
+    """Append missing IGNORE lines to target/.gitignore; never remove existing lines."""
+    path = Path(target).resolve() / '.gitignore'
+    if path.is_symlink():
+        raise ValueError('.gitignore must not be a symbolic link')
+    text = path.read_text(encoding='utf-8') if path.exists() else ''
+    present = {line.strip() for line in text.splitlines()}
+    missing = [line for line in IGNORE if line not in present]
+    if missing:
+        head = '' if not text or text.endswith('\n') else '\n'
+        path.write_text(text + head + '# morrow_kit: 홈 폴더 설정·비밀 제외\n' + '\n'.join(missing) + '\n',
+                        encoding='utf-8')
+    return missing
 
 
 def install(target, refresh_agents=False):
@@ -63,7 +83,9 @@ def install(target, refresh_agents=False):
     elif BEGIN not in original:
         agents.write_bytes(original + (b'\n' if original and not original.endswith(b'\n') else b'')
                            + BEGIN + b'\n' + block + b'\n' + END + b'\n')
+    ignored = ensure_gitignore(target)
     return {'agents_refreshed': agents_updated, 'target': str(target), 'copied': copied, 'readme_modified': False,
+            'gitignore_added': len(ignored),
             'note': 'work/champion/artifacts preserved; static tools/docs refreshed; existing work templates unchanged; use --refresh-agents to back up and update the managed block'}
 
 
@@ -71,9 +93,16 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--target', required=True, type=Path)
     parser.add_argument('--refresh-agents', action='store_true', help='Back up AGENTS.md and replace only its marked FDE block; preserve work files.')
+    parser.add_argument('--gitignore-only', action='store_true',
+                        help='Only add home/secret ignore lines to .gitignore (run before the init commit).')
     args = parser.parse_args()
     try:
         import json
+        if args.gitignore_only:
+            if not Path(args.target).is_dir():
+                raise ValueError('target must be an existing folder')
+            print(json.dumps({'gitignore_added': ensure_gitignore(args.target)}, ensure_ascii=False, indent=2))
+            sys.exit(0)
         print(json.dumps(install(args.target, refresh_agents=args.refresh_agents), ensure_ascii=False, indent=2))
     except (ValueError, OSError) as exc:
         print('ERROR: ' + str(exc), file=sys.stderr)

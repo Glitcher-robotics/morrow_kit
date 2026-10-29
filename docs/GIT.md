@@ -16,6 +16,14 @@ git rev-parse --show-toplevel
 
 ## 2. 원본 그대로 첫 commit
 키트 설치·코드 수정 **전에** 한다. 그래야 이후 diff가 내가 바꾼 것만 보여 준다.
+
+**과제 폴더가 홈(~)이면 먼저 .gitignore.** `ls -a`에 `.bashrc`·`.config`·`.codex`가 보이면 `git add -A`가 셸 설정과 Codex 로그인 정보까지 담는다.
+```sh
+python3 /tmp/morrow_kit/install.py --target . --gitignore-only   # 기존 줄은 두고 빠진 줄만 추가
+git status --short --ignored | head   # 숨김 설정이 !! (무시)로, 과제 파일이 ?? 로 보여야 한다
+```
+키트를 받을 수 없으면 직접 쓴다: `printf '.codex/\n.config/\n.cache/\n.npm/\n.local/\n.bash*\n.profile\n.sudo_as_admin_successful\nnode_modules/\n__pycache__/\n' >> .gitignore`
+
 ```sh
 git init
 git add -A
@@ -36,8 +44,8 @@ git status --short     # 비어 있으면 깨끗하다
 
 ## 3. 키트 설치 commit
 ```sh
-python <morrow_kit 경로>/install.py --target .
-python fde/kit/init_work.py
+python3 /tmp/morrow_kit/install.py --target .   # .gitignore 보강도 다시 확인한다
+python3 fde/kit/init_work.py
 git add -A
 git commit -m "chore: morrow_kit 설치"
 ```

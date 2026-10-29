@@ -4,8 +4,12 @@
 
 ## 시작 0~5분 — 이 순서로
 
-1. 과제 폴더에서 Git 루트 확인. 없으면 `git init` 후 원본 그대로 `init: 과제 원본` commit. 명령 예시는 [GIT](GIT.md).
-2. `python <도구 저장소>/install.py --target <과제 폴더>` → `python fde/kit/init_work.py`.
+0. 키트는 과제 폴더 **밖**에 받는다: `git clone <키트 주소> /tmp/morrow_kit`. 과제 폴더 안에 받으면 제출물·commit·Codex 검색에 섞인다.
+   `pwd; ls -a; date` — 과제 폴더가 홈(`.bashrc`·`.config`가 보임)인지, 서버 시각이 UTC인지 확인한다.
+1. **commit 전에** `python3 /tmp/morrow_kit/install.py --target . --gitignore-only` — `.codex/`(로그인 정보)·셸 설정을 git에서 뺀다.
+   그다음 Git 루트 확인. 없으면 `git init` 후 원본 그대로 `init: 과제 원본` commit. `git status --short`에 과제 파일만 보여야 한다. 명령 예시는 [GIT](GIT.md).
+2. `python3 /tmp/morrow_kit/install.py --target .` → `python3 fde/kit/init_work.py` → `chore: morrow_kit 설치` commit.
+   Codex 업데이트 안내가 뜨면 건너뛴다. `npm install -g`·`sudo` 설치를 하지 않는다.
 3. **과제 폴더에서** Codex를 연다. 상위 폴더에서 열면 AGENTS.md가 로드되지 않는다.
 4. "지금 적용 중인 AGENTS.md 규칙 3개만 말해 줘"로 로드를 확인한다. 못 말하면 다시 연다.
 5. state.md에 작업 폴더·Git 루트·AGENTS 로드 확인을 적는다.
