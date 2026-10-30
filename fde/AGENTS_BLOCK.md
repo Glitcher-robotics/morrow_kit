@@ -5,6 +5,7 @@
 - Computer Use·브라우저 자동화·화면 캡처를 쓰지 않는다. 화면 확인은 HTTP 응답과 테스트로만 한다.
 - Codex·npm 전역 패키지를 업데이트·설치하지 않는다(`npm install -g`, `sudo` 설치 금지). 필요한 의존성은 표준 라이브러리로 대체하거나 사람 승인 후 프로젝트 안에만 둔다.
 - `git add -A` 전에 `git status --short`로 `.codex/`·`.config/`·셸 설정 같은 홈 숨김 파일이 없는지 확인한다. 보이면 commit하지 말고 .gitignore부터 고친다.
+- 웹 서버는 과제 README가 정한 포트를 쓴다. 정하지 않았으면 0.0.0.0:3000(시험 IDE 미리보기 포트)에 띄우고 `--port`로 바꿀 수 있게 한다. 띄운 뒤 그 포트로 HTTP 응답을 확인한다.
 - 서버 시각은 UTC일 수 있다. 판정 기준 시각에 `now()`를 쓰지 않고 합의한 D(데이터 마지막 시각 등)를 쓰며, 기록의 시각에는 시간대를 붙인다.
 - 과정 기록(problem·interview·decisions·requirements·skeleton·state·handoff)은 fde/work에만 둔다. docs/ 등에 같은 종류의 기록을 따로 만들지 않고, 과제가 지정한 제출 문서는 fde/work를 근거로 쓴다.
 - D-ID는 `D1, D2…` 형식으로 쓴다. 정책이 걸린 구현 요청에 D-ID가 없으면 적용할 D를 먼저 확인하고, 해당 D가 없으면 구현하지 말고 질문 후보로 돌린다.

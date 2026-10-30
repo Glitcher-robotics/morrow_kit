@@ -18,7 +18,7 @@ def version(command):
         return None
 
 
-def inspect(root, port=8000):
+def inspect(root, port=3000):
     root = Path(root).resolve()
     writable = False
     try:
@@ -40,7 +40,7 @@ def inspect(root, port=8000):
 
 if __name__ == '__main__':
     p = c.parser('Check runtime, write permission and localhost port; git/node are optional.')
-    p.add_argument('--port', type=int, default=8000)
+    p.add_argument('--port', type=int, default=3000)
     a = p.parse_args()
     result = inspect(a.root, a.port)
     print(__import__('json').dumps(result, ensure_ascii=False, indent=2))

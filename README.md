@@ -31,7 +31,7 @@ git clone https://github.com/Glitcher-robotics/morrow_kit.git
 python morrow_kit/install.py --target ./my-project
 cd my-project
 python fde/kit/init_work.py
-python fde/kit/preflight.py --port 8000
+python fde/kit/preflight.py --port 3000
 ```
 
 설치는 프로젝트 README와 기존 work/champion/artifacts를 보존합니다. 재설치는 정적 도구·템플릿·문서를 갱신하고, 초기화는 **없는 작업 파일만** 만듭니다.

@@ -58,7 +58,7 @@ def parse_body(raw, content_type):
     return rows
 
 
-def create_server(port=8000, analyzer=None, host='127.0.0.1'):
+def create_server(port=3000, analyzer=None, host='127.0.0.1'):
     analyze = analyzer or (lambda rows: {'rows': rows, 'total': len(rows)})
 
     class Handler(BaseHTTPRequestHandler):
@@ -105,7 +105,7 @@ def create_server(port=8000, analyzer=None, host='127.0.0.1'):
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--port', type=int, default=8000)
+    p.add_argument('--port', type=int, default=3000)
     p.add_argument('--host', default='127.0.0.1', help='Use 0.0.0.0 only when the project requires connections through another interface.')
     a = p.parse_args()
     with create_server(a.port, host=a.host) as server:

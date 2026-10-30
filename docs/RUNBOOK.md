@@ -10,7 +10,7 @@ Python 3.10 이상, 표준 라이브러리만 사용한다. Git·Node는 preflig
 python morrow_kit/install.py --target ./my-project
 cd my-project
 python fde/kit/init_work.py
-python fde/kit/preflight.py --port 8000
+python fde/kit/preflight.py --port 3000
 ```
 
 - 설치는 대상 README·기존 work/champion/artifacts를 보존한다. 정적 도구·템플릿·fde/docs는 갱신한다.

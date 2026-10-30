@@ -104,7 +104,7 @@ def compute(rows, p):
             'counts': {lv: sum(r['level'] == lv for r in result) for lv in LEVELS}, 'rows': shown}
 
 
-def create_server(port=8000, host='127.0.0.1', rows=None, schema=None):
+def create_server(port=3000, host='127.0.0.1', rows=None, schema=None):
     rows = rows if rows is not None else sample_data()
     schema = schema or load_defaults()
     files = {'/': ('index.html', 'text/html; charset=utf-8'), '/live.js': ('live.js', 'text/javascript; charset=utf-8')}
@@ -142,7 +142,7 @@ def create_server(port=8000, host='127.0.0.1', rows=None, schema=None):
 
 if __name__ == '__main__':
     a = argparse.ArgumentParser(description=__doc__)
-    a.add_argument('--port', type=int, default=8000)
+    a.add_argument('--port', type=int, default=3000)
     a.add_argument('--host', default='127.0.0.1', help='과제가 요구할 때만 0.0.0.0')
     args = a.parse_args()
     with create_server(args.port, args.host) as server:

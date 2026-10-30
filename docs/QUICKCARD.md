@@ -16,6 +16,7 @@
 3. **과제 폴더에서** Codex를 연다. 상위 폴더에서 열면 AGENTS.md가 로드되지 않는다.
 4. "지금 적용 중인 AGENTS.md 규칙 3개만 말해 줘"로 로드를 확인한다. 못 말하면 다시 연다.
 5. state.md에 작업 폴더·Git 루트·AGENTS 로드 확인을 적는다.
+6. 포트: README에 정해져 있으면 그 포트, 없으면 **3000**(시험 IDE 미리보기). 서버는 0.0.0.0에 띄우고 미리보기로 화면이 보이는지 바로 확인한다.
 
 **새 세션을 열 때마다 첫 메시지:** "handoff 요약만 읽고 STATE와 다음 3행동을 한 줄로 말해. 이 세션은 [범위]만 맡는다. 기록 파일은 고치지 마(기록 담당 세션이면 이어받기 시험 칸에 남겨)."
 여러 세션을 돌리면 기록 파일(decisions·requirements·state·handoff)을 고치는 세션은 하나만 정한다.
@@ -43,7 +44,7 @@
 ## 독립 work 후보 도구
 
 ```sh
-python fde/kit/preflight.py --port 8000
+python fde/kit/preflight.py --port 3000
 python fde/kit/init_work.py
 python fde/kit/evaluate.py
 python fde/kit/promote.py --report latest
