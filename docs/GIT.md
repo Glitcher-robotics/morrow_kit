@@ -87,6 +87,7 @@ git log --oneline              # 내가 무엇을 어떤 순서로 정했나
 git show --stat <commit>       # 그 commit에서 바뀐 파일
 git diff <init commit> --stat  # 원본 대비 전체 변경 범위
 ```
+답안 틀: "왜 했나"는 결론→근거(Dn)→안 했으면, "장애·틀릴 때"는 약점 지점→위험·파급→다음 검증·개선. 자세한 건 [QUICKCARD](QUICKCARD.md)의 서술형.
 
 ## 7. 원격 저장소 (과제가 허용할 때만)
 ```sh
